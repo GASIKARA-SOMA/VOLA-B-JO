@@ -1,1 +1,2152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expo Apps | Capitalisez Votre Temps</title>
+<meta name="description" content="Tableau de bord des meilleures opportunités en ligne. Transformez votre temps en revenus avec des plateformes vérifiées.">
 
+<!-- Polices premium -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ===== RESET & VARIABLES ===== */
+:root {
+  /* Palette professionnelle dominante */
+  --black-deep: #0A0A0F;
+  --black-card: #11111F;
+  --black-bg: #0D0D15;
+  --white-pure: #FFFFFF;
+  --white-off: #F8F9FA;
+  --gray-light: #E2E4E9;
+  --gray-medium: #8A8CA5;
+  --gray-dark: #474760;
+  
+  /* Accents stimulants */
+  --blue-electric: #0066FF;
+  --blue-hover: #3385FF;
+  --green-profit: #00D4AA;
+  --yellow-energy: #FFB800;
+  --red-alert: #FF4757;
+  
+  /* Effets */
+  --gradient-main: linear-gradient(135deg, #0066FF 0%, #00D4AA 100%);
+  --gradient-card: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 212, 170, 0.1) 100%);
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 20px 50px rgba(0, 102, 255, 0.15);
+  
+  /* Bordures */
+  --border-card: 1px solid rgba(255, 255, 255, 0.08);
+  --border-light: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--black-bg);
+  color: var(--white-off);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Fond géométrique subtil */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(0, 102, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.05) 0%, transparent 50%),
+    linear-gradient(45deg, var(--black-bg) 0%, var(--black-deep) 100%);
+  z-index: -1;
+}
+
+/* ===== NAVIGATION PROFESSIONNELLE ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 1000;
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--white-pure);
+  text-decoration: none;
+}
+
+.nav-logo i {
+  color: var(--blue-electric);
+  font-size: 1.5rem;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--gray-light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+  color: var(--white-pure);
+}
+
+.nav-link.active {
+  color: var(--blue-electric);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gradient-main);
+  border-radius: 2px;
+}
+
+.nav-cta {
+  background: var(--gradient-main);
+  color: var(--white-pure);
+  padding: 0.6rem 1.8rem;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+}
+
+.mobile-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--white-pure);
+  cursor: pointer;
+}
+
+/* ===== HERO DOMINANT ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+  z-index: -1;
+}
+
+.hero-content {
+  max-width: 700px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 212, 170, 0.1);
+  border: 1px solid rgba(0, 212, 170, 0.3);
+  color: var(--green-profit);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5rem;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, #FFFFFF, var(--gray-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--gray-medium);
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: var(--blue-electric);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--gray-medium);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--gradient-main);
+  color: var(--white-pure);
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--gray-light);
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid var(--gray-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--blue-electric);
+  color: var(--white-pure);
+}
+
+/* ===== SECTION TITRE ===== */
+.section-header {
+  text-align: center;
+  padding: 0 5%;
+  margin-bottom: 4rem;
+}
+
+.section-label {
+  display: inline-block;
+  background: var(--gradient-main);
+  color: var(--white-pure);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem;
+  color: var(--white-pure);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--gray-medium);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== CARTES TRADING DESK ===== */
+.platforms-section {
+  padding: 6rem 5%;
+}
+
+.category-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--gray-light);
+  padding: 0.7rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-btn.active {
+  background: var(--gradient-main);
+  color: var(--white-pure);
+  border-color: transparent;
+}
+
+.filter-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white-pure);
+}
+
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.platform-card {
+  background: rgba(17, 17, 31, 0.8);
+  border: var(--border-card);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.platform-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-card);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.platform-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0, 102, 255, 0.3);
+  box-shadow: var(--shadow-hover);
+}
+
+.platform-card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.platform-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--white-pure);
+  letter-spacing: 1px;
+}
+
+.platform-category {
+  background: rgba(0, 212, 170, 0.1);
+  color: var(--green-profit);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.card-body {
+  position: relative;
+  z-index: 2;
+}
+
+.platform-description {
+  color: var(--gray-medium);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.platform-features {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gray-light);
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.feature-item i {
+  color: var(--green-profit);
+  font-size: 0.8rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating i {
+  color: var(--yellow-energy);
+  font-size: 0.9rem;
+}
+
+.rating span {
+  color: var(--gray-light);
+  font-size: 0.9rem;
+  margin-left: 5px;
+}
+
+.platform-link {
+  background: var(--gradient-main);
+  color: var(--white-pure);
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.platform-link:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+}
+
+/* ===== CALCULATEUR DE GAINS ===== */
+.calculator-section {
+  padding: 6rem 5%;
+  background: rgba(10, 10, 15, 0.5);
+  border-radius: 40px;
+  margin: 0 5% 6rem;
+  border: var(--border-light);
+}
+
+.calculator-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--white-pure);
+}
+
+.calculator-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(17, 17, 31, 0.8);
+  border-radius: 25px;
+  padding: 3rem;
+  border: var(--border-card);
+}
+
+.calculator-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.input-group label {
+  display: block;
+  color: var(--gray-light);
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.input-group select,
+.input-group input {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: var(--white-pure);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-group select:focus,
+.input-group input:focus {
+  outline: none;
+  border-color: var(--blue-electric);
+  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
+}
+
+.calculator-result {
+  background: var(--gradient-main);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.result-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+}
+
+.result-amount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  color: var(--white-pure);
+  line-height: 1;
+}
+
+/* ===== MEGA RÉPERTOIRE ===== */
+.mega-repertoire {
+  padding: 6rem 5%;
+  background: rgba(10, 10, 15, 0.8);
+}
+
+.mega-controls-container {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.mega-search-box {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.mega-search-box div {
+  position: relative;
+}
+
+.mega-search-box i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-medium);
+}
+
+.mega-search-box input {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 45px;
+  background: rgba(17, 17, 31, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: var(--white-off);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.mega-search-box input:focus {
+  outline: none;
+  border-color: var(--blue-electric);
+  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
+}
+
+.mega-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+
+.mega-filter-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--gray-medium);
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.mega-filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white-off);
+}
+
+.mega-filter-btn.active {
+  background: var(--gradient-main);
+  color: var(--white-pure);
+  border-color: transparent;
+}
+
+.mega-platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.8rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.mega-platform-card {
+  background: rgba(17, 17, 31, 0.8);
+  border: var(--border-card);
+  border-radius: 18px;
+  padding: 1.5rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.mega-platform-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 102, 255, 0.3);
+  box-shadow: var(--shadow-hover);
+}
+
+.mega-load-more-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.mega-load-more-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--gray-medium);
+  padding: 0.9rem 2.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.mega-load-more-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--blue-electric);
+  color: var(--white-off);
+}
+
+/* ===== FOOTER CENTRE DE CONTRÔLE ===== */
+.footer {
+  background: var(--black-deep);
+  padding: 5rem 5% 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.footer-col h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--white-pure);
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--gray-medium);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-links a:hover {
+  color: var(--blue-electric);
+}
+
+.footer-links a i {
+  width: 16px;
+  text-align: center;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: var(--white-pure);
+}
+
+.newsletter-btn {
+  background: var(--gradient-main);
+  color: var(--white-pure);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.newsletter-btn:hover {
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.copyright {
+  color: var(--gray-dark);
+  font-size: 0.9rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-medium);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: var(--blue-electric);
+  color: var(--white-pure);
+  transform: translateY(-3px);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 102, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .hero-title { font-size: 4rem; }
+  .platforms-grid, .mega-platforms-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+}
+
+@media (max-width: 992px) {
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats { gap: 2rem; }
+  .stat-number { font-size: 2.5rem; }
+  .mega-controls-container { flex-direction: column; }
+}
+
+@media (max-width: 768px) {
+  .navbar { padding: 1rem; }
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    flex-direction: column;
+    background: var(--black-deep);
+    padding: 2rem;
+    transition: left 0.3s ease;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .nav-menu.active { left: 0; }
+  .mobile-toggle { display: block; }
+  .hero-title { font-size: 3rem; }
+  .section-title { font-size: 2.5rem; }
+  .calculator-container { padding: 2rem; }
+  .platforms-grid, .mega-platforms-grid { grid-template-columns: 1fr; }
+  .mega-filter-buttons { justify-content: flex-start; overflow-x: auto; padding-bottom: 0.5rem; }
+}
+
+@media (max-width: 576px) {
+  .hero { padding: 0 1rem; padding-top: 80px; }
+  .hero-stats { flex-direction: column; gap: 1.5rem; }
+  .hero-cta { flex-direction: column; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
+  </head>
+  <body>
+
+<!-- Navigation Professionnelle -->
+<nav class="navbar">
+  <a href="#" class="nav-logo">
+    <i class="fas fa-chart-line"></i> GASIKARA SOMA
+  </a>
+  
+  <div class="nav-menu" id="navMenu">
+    <a href="#home" class="nav-link active">Dashboard</a>
+    <a href="#platforms" class="nav-link">Plateformes</a>
+    <a href="#calculator" class="nav-link">Calculateur</a>
+    <a href="#mega-repertoire" class="nav-link">Mega Répertoire</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#" class="nav-cta pulse-animation">
+      <i class="fas fa-rocket"></i> Commencer
+    </a>
+  </div>
+  
+  <div class="mobile-toggle" id="mobileToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+</nav>
+
+<!-- Hero Dominant -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fas fa-bolt"></i>
+      <span>VOLA BÔJO</span>
+    </div>
+    
+    <h1 class="hero-title">CAPITALISEZ<br>VOTRE TEMPS</h1>
+    
+    <p class="hero-subtitle">
+      Meilleures opportunités en ligne . 
+      Transformez vos compétences et votre temps en flux de revenus réels.
+<h1 class="hero-title">Zéro INVESTISSEMENT</h1>
+    </p>
+<!-- ===== SECTION DIAPORAMA DYNAMIQUE ===== -->
+<section class="expo-diaporama-section" style="padding: 4rem 5%;">
+  <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+    <span class="section-label" style="display:inline-block; background: linear-gradient(135deg, #0066FF 0%, #00D4AA 100%); color: white; padding: 0.5rem 1.5rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; letter-spacing: 1px;">Jouer soyer Constant</span>
+    <h2 class="section-title" style="font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: #F8F9FA; margin-bottom: 1rem; line-height: 1.1; letter-spacing: 0.5px;">SUCCÈS VIENDRA</h2>
+    <p class="section-subtitle" style="font-size: 1.1rem; color: #8A8CA5; max-width: 700px; margin: 0 auto;">
+      Jouer et Gagner
+    </p>
+  </div>
+
+  <!-- Conteneur du diaporama - RESPONSIVE -->
+  <div class="expo-slideshow-responsive" style="max-width: 1200px; margin: 0 auto; position: relative; height: auto; min-height: 300px; overflow: hidden; border-radius: 20px;
+  display:flex;">
+    
+    <!-- Slide 1 (6 secondes) -->
+    <div id="expo-slide-1" class="expo-slide-resp" style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 20px; opacity: 0; padding: 20px; box-sizing: border-box;">
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Jeune femme souriante avec téléphone" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1512485694743-9c9538b4e6e0?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Jeune homme célébrant une victoire" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1494790108755-2616b786d4d1?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Couple heureux avec appareils" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+    </div>
+
+    <!-- Slide 2 (6 secondes) -->
+    <div id="expo-slide-2" class="expo-slide-resp" style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 20px; opacity: 0; padding: 20px; box-sizing: border-box;">
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Femme travaillant sur ordinateur portable" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Homme vérifiant ses gains sur mobile" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Personne montrant écran de succès" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+    </div>
+
+    <!-- Slide 3 (6 secondes) -->
+    <div id="expo-slide-3" class="expo-slide-resp" style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 20px; opacity: 0; padding: 20px; box-sizing: border-box;">
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Femme entrepreneur souriante" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Jeune homme avec tablette et café" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Couple célébrant en extérieur" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+    </div>
+
+    <!-- Slide 4 (10 secondes) -->
+    <div id="expo-slide-4" class="expo-slide-resp" style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 20px; opacity: 0; padding: 20px; box-sizing: border-box;">
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Professionnelle en vidéoconférence" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Homme avec laptop dans un café" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1564069114553-7215e1ff1890?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Femme avec smartphone et documents" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+    </div>
+
+    <!-- Slide 5 (10 secondes) -->
+    <div id="expo-slide-5" class="expo-slide-resp" style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 20px; opacity: 0; padding: 20px; box-sizing: border-box;">
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1551836026-d5c2c0b4d1a1?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Jeune femme étudiant en ligne" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Homme avec casque et ordinateur" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="expo-image-resp" style="flex: 1; max-width: 32%; min-width: 200px; aspect-ratio: 3/4; border-radius: 15px; overflow: hidden; position: relative;">
+        <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.&auto=format&fit=crop&w=800&q=80" alt="Couple travaillant ensemble" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+    </div>
+        </div>
+  <!-- Indicateurs de slide -->
+  <div class="expo-indicators-resp" style="display: flex; justify-content: center; gap: 12px; margin-top: 2rem; flex-wrap: wrap;">
+    <div class="expo-indicator-resp expo-active-resp" data-expo-slide="0" style="width: 10px; height: 10px; border-radius: 50%; background: #0066FF; cursor: pointer; transition: all 0.3s ease; transform: scale(1.3);"></div>
+    <div class="expo-indicator-resp" data-expo-slide="1" style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.3s ease;"></div>
+    <div class="expo-indicator-resp" data-expo-slide="2" style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.3s ease;"></div>
+    <div class="expo-indicator-resp" data-expo-slide="3" style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.3s ease;"></div>
+    <div class="expo-indicator-resp" data-expo-slide="4" style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.3s ease;"></div>
+  </div>
+</section>
+
+<style>
+/* ===== STYLES RESPONSIVE POUR DIAPORAMA ===== */
+
+/* Conteneur principal responsive */
+.expo-slideshow-responsive {
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+}
+
+/* Styles pour les slides */
+.expo-slide-resp {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+}
+
+/* Styles pour les conteneurs d'images - RESPONSIVE */
+.expo-image-resp {
+  flex: 1 1 30%; /* Base de 30% pour 3 colonnes */
+  max-width: 32%;
+  margin: 0 1%;
+  aspect-ratio: 3/4;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animation d'entrée */
+.expo-slide-resp.expo-entering-resp {
+  opacity: 1 !important;
+  z-index: 10;
+}
+
+.expo-slide-resp.expo-entering-resp .expo-image-resp:nth-child(1),
+.expo-slide-resp.expo-entering-resp .expo-image-resp:nth-child(3) {
+  animation: expoSlideInOuterResp 1s ease forwards;
+}
+
+.expo-slide-resp.expo-entering-resp .expo-image-resp:nth-child(2) {
+  animation: expoSlideInMiddleResp 1s ease forwards;
+}
+
+/* Animation de sortie */
+.expo-slide-resp.expo-leaving-resp {
+  opacity: 1 !important;
+  z-index: 5;
+}
+
+.expo-slide-resp.expo-leaving-resp .expo-image-resp:nth-child(1),
+.expo-slide-resp.expo-leaving-resp .expo-image-resp:nth-child(3) {
+  animation: expoSlideOutOuterResp 1s ease forwards;
+}
+
+.expo-slide-resp.expo-leaving-resp .expo-image-resp:nth-child(2) {
+  animation: expoSlideOutMiddleResp 1s ease forwards;
+}
+
+/* Animations spécifiques */
+@keyframes expoSlideInOuterResp {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes expoSlideInMiddleResp {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes expoSlideOutOuterResp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+@keyframes expoSlideOutMiddleResp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+
+/* Indicateurs actifs */
+.expo-indicator-resp.expo-active-resp {
+  transform: scale(1.3) !important;
+  background: #0066FF !important;
+  box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+}
+
+/* ===== MEDIA QUERIES POUR RESPONSIVE ===== */
+
+/* Tablettes (768px à 1024px) */
+@media (max-width: 1024px) {
+  .expo-image-resp {
+    flex: 1 1 45%; /* 2 colonnes sur tablette */
+    max-width: 48%;
+    margin: 1%;
+  }
+  
+  .expo-slide-resp {
+    gap: 15px;
+  }
+  
+  .section-title {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* Mobiles (moins de 768px) */
+@media (max-width: 768px) {
+  .expo-diaporama-section {
+    padding: 3rem 5% !important;
+  }
+  
+  .expo-image-resp {
+    flex: 1 1 90%; /* 1 colonne sur mobile */
+    max-width: 90%;
+    margin: 10px auto;
+    aspect-ratio: 4/3; /* Format plus horizontal sur mobile */
+  }
+   .expo-slide-resp {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px !important;
+  }
+  
+  .section-title {
+    font-size: 2rem !important;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem !important;
+    padding: 0 10px;
+  }
+  
+  .expo-indicators-resp {
+    gap: 8px;
+  }
+}
+
+/* Très petits mobiles (moins de 480px) */
+@media (max-width: 480px) {
+  .expo-diaporama-section {
+    padding: 2rem 3% !important;
+  }
+  
+  .expo-image-resp {
+    flex: 1 1 95%;
+    max-width: 95%;
+    aspect-ratio: 1/1; /* Carré sur très petit écran */
+  }
+  
+  .section-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .section-label {
+    font-size: 0.8rem !important;
+    padding: 0.4rem 1rem !important;
+  }
+}
+</style>
+
+<script>
+// ===== DIAPORAMA RESPONSIVE - CODE SÉCURISÉ =====
+(function() {
+    'use strict';
+    
+    console.log('🚀 Initialisation du diaporama responsive...');
+    
+    // Configuration des slides selon tes spécifications
+    const EXPO_SLIDES_CONFIG_RESP = [
+        { id: 'expo-slide-1', pause: 6000 },   // Slide 1: 6 secondes
+        { id: 'expo-slide-2', pause: 6000 },   // Slide 2: 6 secondes
+        { id: 'expo-slide-3', pause: 6000 },   // Slide 3: 6 secondes
+        { id: 'expo-slide-4', pause: 10000 },  // Slide 4: 10 secondes
+        { id: 'expo-slide-5', pause: 10000 }   // Slide 5: 10 secondes
+    ];
+    
+    const TRANSITION_DURATION_RESP = 1000; // 1 seconde de transition
+    let expoCurrentIndexResp = 0;
+    let expoIsTransitioningResp = false;
+    let expoTimeoutsResp = [];
+    let expoSlideshowActiveResp = true;
+    
+    // Nettoyage des timeouts
+    function expoClearTimeoutsResp() {
+        expoTimeoutsResp.forEach(timeoutId => {
+            if (timeoutId) clearTimeout(timeoutId);
+        });
+        expoTimeoutsResp = [];
+    }
+    
+    // Mise à jour des indicateurs
+    function expoUpdateIndicatorsResp(index) {
+        const indicators = document.querySelectorAll('.expo-indicator-resp');
+        if (!indicators.length) return;
+        
+        indicators.forEach((indicator, i) => {
+            if (i === index) {
+                indicator.classList.add('expo-active-resp');
+                indicator.style.background = '#0066FF';
+                indicator.style.transform = 'scale(1.3)';
+            } else {
+                indicator.classList.remove('expo-active-resp');
+                indicator.style.background = 'rgba(255, 255, 255, 0.2)';
+                indicator.style.transform = 'scale(1)';
+            }
+        });
+    }
+    
+    // Transition entre slides
+    function expoDoTransitionResp() {
+        if (!expoSlideshowActiveResp || expoIsTransitioningResp) return;
+        
+        expoIsTransitioningResp = true;
+        
+        const currentSlide = document.getElementById(EXPO_SLIDES_CONFIG_RESP[expoCurrentIndexResp].id);
+        const nextIndex = (expoCurrentIndexResp + 1) % EXPO_SLIDES_CONFIG_RESP.length;
+        const nextSlide = document.getElementById(EXPO_SLIDES_CONFIG_RESP[nextIndex].id);
+        
+        // Vérification de sécurité
+        if (!currentSlide || !nextSlide) {
+            console.error('❌ Slide responsive non trouvé');
+            expoIsTransitioningResp = false;
+            return;
+        }
+        
+        // Animation de sortie
+        currentSlide.classList.remove('expo-entering-resp');
+        currentSlide.classList.add('expo-leaving-resp');
+        
+        // Préparation de l'entrée
+        nextSlide.style.opacity = '1';
+        nextSlide.classList.remove('expo-leaving-resp');
+        nextSlide.classList.add('expo-entering-resp');
+        
+        // Mise à jour des indicateurs
+        expoUpdateIndicatorsResp(nextIndex);
+        
+        // Fin de la transition
+        const transitionEnd = setTimeout(() => {
+            currentSlide.style.opacity = '0';
+            currentSlide.classList.remove('expo-leaving-resp');
+            
+            expoCurrentIndexResp = nextIndex;
+            expoIsTransitioningResp = false;
+            
+            // Planification de la prochaine transition
+      if (expoSlideshowActiveResp) {
+                const nextPause = EXPO_SLIDES_CONFIG_RESP[nextIndex].pause;
+                const nextTransition = setTimeout(expoDoTransitionResp, nextPause);
+                expoTimeoutsResp.push(nextTransition);
+            }
+        }, TRANSITION_DURATION_RESP);
+        
+        expoTimeoutsResp.push(transitionEnd);
+    }
+    
+    // Navigation manuelle
+    function expoGoToSlideResp(index) {
+        if (index === expoCurrentIndexResp || expoIsTransitioningResp || !expoSlideshowActiveResp) return;
+        
+        expoClearTimeoutsResp();
+        
+        // Masquer le slide actuel
+        const currentSlide = document.getElementById(EXPO_SLIDES_CONFIG_RESP[expoCurrentIndexResp].id);
+        if (currentSlide) {
+            currentSlide.style.opacity = '0';
+            currentSlide.classList.remove('expo-entering-resp', 'expo-leaving-resp');
+        }
+        
+        // Afficher le nouveau slide
+        const targetSlide = document.getElementById(EXPO_SLIDES_CONFIG_RESP[index].id);
+        if (targetSlide) {
+            targetSlide.style.opacity = '1';
+            targetSlide.classList.remove('expo-leaving-resp');
+            targetSlide.classList.add('expo-entering-resp');
+        }
+        
+        // Mettre à jour l'index et les indicateurs
+        expoCurrentIndexResp = index;
+        expoUpdateIndicatorsResp(index);
+        
+        // Redémarrer le cycle automatique
+        const restartTimeout = setTimeout(expoDoTransitionResp, EXPO_SLIDES_CONFIG_RESP[index].pause);
+        expoTimeoutsResp.push(restartTimeout);
+    }
+    
+    // Initialisation
+    function expoInitSlideshowResp() {
+        // Vérifier que le conteneur existe
+        const container = document.querySelector('.expo-slideshow-responsive');
+        if (!container) {
+            console.warn('⚠️ Conteneur du diaporama responsive non trouvé');
+            return;
+        }
+        
+        console.log('✅ Diaporama responsive détecté, initialisation...');
+        
+        // Initialiser le premier slide
+        const firstSlide = document.getElementById('expo-slide-1');
+        if (firstSlide) {
+            firstSlide.style.opacity = '1';
+            firstSlide.classList.add('expo-entering-resp');
+        }
+        
+        // Configurer les événements des indicateurs
+        const indicators = document.querySelectorAll('.expo-indicator-resp');
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', function(e) {
+                e.preventDefault();
+                expoGoToSlideResp(index);
+            });
+        });
+        
+        // Démarrer le cycle automatique
+        const startTimeout = setTimeout(expoDoTransitionResp, EXPO_SLIDES_CONFIG_RESP[0].pause);
+        expoTimeoutsResp.push(startTimeout);
+        
+        // Nettoyage à la fermeture de la page
+        window.addEventListener('beforeunload', function() {
+            expoSlideshowActiveResp = false;
+            expoClearTimeoutsResp();
+        });
+        
+        // Gestion de la visibilité de la page
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                expoSlideshowActiveResp = false;
+            } else {
+                expoSlideshowActiveResp = true;
+            }
+        });
+        
+        // Redimensionnement de la fenêtre
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                // Réinitialiser les animations si nécessaire
+                console.log('🔄 Redimensionnement détecté - ajustement du diaporama');
+            }, 250);
+        });
+        
+        console.log('🎬 Diaporama responsive initialisé avec succès!');
+    }
+    
+    // Attendre que le DOM soit chargé
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', expoInitSlideshowResp);
+    } else {
+        expoInitSlideshowResp();
+    }
+})();
+</script>
+    
+    <div class="hero-cta">
+      <a href="#platforms" class="btn-primary">
+        <i class="fas fa-chart-bar"></i> Explorer les opportunités
+      </a>
+      <a href="#calculator" class="btn-secondary">
+        <i class="fas fa-calculator"></i> Calculer mes gains
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Section Plateformes -->
+<section class="platforms-section" id="platforms">
+  <div class="section-header">
+    <span class="section-label">TABLEAU DE BORD</span>
+    <h2 class="section-title">PLATEFORMES VERIFIÉES</h2>
+    <p class="section-subtitle">
+      Sélection rigoureuse des meilleures opportunités classées par ROI et fiabilité
+    </p>
+  </div>
+  
+  <div class="category-filter">
+    <button class="filter-btn active" data-category="all">
+      <i class="fas fa-layer-group"></i> Toutes
+    </button>
+    <button class="filter-btn" data-category="rewards">
+      <i class="fas fa-gift"></i> Récompenses
+    </button>
+    <button class="filter-btn" data-category="surveys">
+      <i class="fas fa-chart-pie"></i> Sondages
+    </button>
+    <button class="filter-btn" data-category="microtasks">
+      <i class="fas fa-tasks"></i> Micro-tâches
+    </button>
+    <button class="filter-btn" data-category="freelance">
+      <i class="fas fa-code"></i> Freelance
+    </button>
+  </div>
+  
+  <div class="platforms-grid" id="platformsGrid">
+    <!-- Carte 1 -->
+    <div class="platform-card" data-category="rewards">
+      <div class="card-header">
+        <h3 class="platform-name">FREECASH</h3>
+        <span class="platform-category">Récompenses</span>
+      </div>
+      <div class="card-body">
+        <p class="platform-description">
+          Plateforme complète d'offres, jeux et tâches avec paiements rapides.
+          Potentiel élevé pour utilisateurs actifs.
+        </p>
+        <ul class="platform-features">
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Paiement instantané</span>
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Offres internationales</span>
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Bonus quotidiens</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+          <span>4.7</span>
+        </div>
+        <a href="https://freecash.com" target="_blank" class="platform-link">
+          Visiter <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Carte 2 -->
+    <div class="platform-card" data-category="surveys">
+      <div class="card-header">
+        <h3 class="platform-name">YSENSE</h3>
+        <span class="platform-category">Sondages</span>
+      </div>
+      <div class="card-body">
+        <p class="platform-description">
+          Panels de sondages internationaux avec haute rémunération. 
+          Idéal pour partager son opinion rémunérée.
+        </p>
+        <ul class="platform-features">
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Sondages premium</span>
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Compatibilité mobile</span>
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Retraits multiples</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <span>4.2</span>
+        </div>
+        <a href="https://www.ysense.com" target="_blank" class="platform-link">
+          Visiter <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+     <!-- Carte 3 -->
+    <div class="platform-card" data-category="microtasks">
+      <div class="card-header">
+        <h3 class="platform-name">REMOTASKS</h3>
+        <span class="platform-category">Micro-tâches</span>
+      </div>
+      <div class="card-body">
+        <p class="platform-description">
+          Annotation de données pour l'IA. Tâches techniques bien rémunérées 
+          nécessitant concentration et précision.
+        </p>
+        <ul class="platform-features">
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Paiement par heure</span>
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Formation fournie</span>
+          </li>
+          <li class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Travail flexible</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <span>5.0</span>
+        </div>
+        <a href="https://www.remotasks.com" target="_blank" class="platform-link">
+          Visiter <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Calculateur de Gains -->
+<section class="calculator-section" id="calculator">
+  <h2 class="calculator-title">ESTIMATION D'APPROXIMATION DE CALCUL DE GAINS</h2>
+  <div class="calculator-container">
+    <div class="calculator-inputs">
+      <div class="input-group">
+        <label for="platform"><i class="fas fa-layer-group"></i> Plateforme</label>
+        <select id="platform">
+          <option value="freecash">Freecash (Offres & Jeux)</option>
+          <option value="ysense">ySense (Sondages)</option>
+          <option value="remotasks">Remotasks (Micro-tâches)</option>
+          <option value="fiverr">Fiverr (Freelance)</option>
+          <option value="usertesting">UserTesting (Tests UX)</option>
+        </select>
+      </div>
+      
+      <div class="input-group">
+        <label for="hours"><i class="fas fa-clock"></i> Heures/semaine</label>
+        <input type="range" id="hours" min="1" max="40" value="10">
+        <div class="range-value"><span id="hoursValue">10</span> heures</div>
+      </div>
+      
+      <div class="input-group">
+        <label for="experience"><i class="fas fa-chart-line"></i> Niveau</label>
+        <select id="experience">
+          <option value="beginner">Débutant</option>
+          <option value="intermediate" selected>Intermédiaire</option>
+          <option value="advanced">Avancé</option>
+          <option value="expert">Expert</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="calculator-result">
+      <div class="result-label">GAINS ESTIMÉS MENSUELS GRÂCE À VOTRE CONSTANCE </div>
+      <div class="result-amount" id="resultAmount">200</div>
+      <p style="margin-top: 1rem; color: rgba(255,255,255,0.8);">
+        Basé sur les performances moyennes des utilisateurs
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Mega Répertoire -->
+<section class="mega-repertoire" id="mega-repertoire">
+  <div class="section-header">
+    <span class="section-label">BASE DE DONNÉES ULTIME</span>
+    <h2 class="section-title">MEGA RÉPERTOIRE</h2>
+    <p class="section-subtitle">
+      Explorez <span id="platformCount" style="color: var(--green-profit); font-weight: bold;">100+</span> opportunités vérifiées. Filtrez et trouvez votre prochaine source de revenus.
+    </p>
+  </div>
+
+  <div class="mega-controls-container">
+    <div class="mega-search-box">
+      <div>
+        <i class="fas fa-search"></i>
+        <input type="text" id="megaPlatformSearch" placeholder="Rechercher une plateforme...">
+      </div>
+    </div>
+    
+    <div class="mega-filter-buttons">
+      <button class="mega-filter-btn active" data-filter="all">Toutes</button>
+      <button class="mega-filter-btn" data-filter="sondage">📊 Sondages</button>
+      <button class="mega-filter-btn" data-filter="micro">🔧 Micro-tâches</button>
+      <button class="mega-filter-btn" data-filter="freelance">💼 Freelance</button>
+      <button class="mega-filter-btn" data-filter="jeux">🎮 Jeux & Apps</button>
+      <button class="mega-filter-btn" data-filter="vendre">🛒 Vendre/Créer</button>
+      <button class="mega-filter-btn" data-filter="divers">🌐 Divers</button>
+    </div>
+  </div>
+
+  <div class="mega-platforms-grid" id="megaPlatformsGrid"></div>
+
+  <div class="mega-load-more-container">
+    <button id="megaLoadMoreBtn" class="mega-load-more-btn">
+      <i class="fas fa-plus-circle"></i> Charger plus de plateformes
+    </button>
+    <p id="megaShowingCount" style="color: var(--gray-medium); margin-top: 1rem; font-size: 0.9rem;">
+      Affichage de <span id="megaCurrentCount">30</span> sur <span id="megaTotalCount">100+</span> plateformes
+    </p>
+  </div>
+</section>
+
+<!-- Footer Centre de Contrôle -->
+<footer class="footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h3>EXPO APPS</h3>
+      <p style="color: var(--gray-medium); margin-bottom: 1.5rem;">
+        Votre tableau de bord personnel pour maximiser vos revenus en ligne.
+        Plateformes vérifiées, outils professionnels, communauté active.
+      </p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Votre email">
+        <button class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    
+    <div class="footer-col">
+      <h3>CATÉGORIES</h3>
+      <ul class="footer-links">
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Récompenses & GPT</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Sondages rémunérés</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Micro-tâches</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Freelance & Services</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Crypto & Récompenses</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-col">
+      <h3>RESSOURCES</h3>
+      <ul class="footer-links">
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Guides Débutants</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Stratégies Avancées</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Comparatif Plateformes</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Calendrier Paiements</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Forum Communauté</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-col">
+      <h3>CONTACT & LÉGAL</h3>
+      <ul class="footer-links">
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Support Technique</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Devenir Partenaire</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Mentions Légales</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Politique de Confidentialité</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Conditions d'Utilisation</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <div class="copyright">
+      © 2024 Expo Apps. Tous droits réservés. Conçu avec <i class="fas fa-heart" style="color: var(--red-alert);"></i> pour les chercheurs d'opportunités.
+    </div>
+    
+    <div class="social-links">
+      <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== DONNÉES DES PLATEFORMES POUR MEGA RÉPERTOIRE =====
+const allPlatforms = [
+  // 📊 SONDAGES (25+)
+  { name: "Swagbucks", category: "sondage", desc: "Sondages, vidéos, achats, cashback", url: "https://www.swagbucks.com", icon: "fa-poll-h" },
+  { name: "Toluna", category: "sondage", desc: "Communauté de sondages et d'opinions", url: "https://www.toluna.com", icon: "fa-comment-dots" },
+  { name: "Freecash", category: "sondage", desc: "Sondages, jeux, offres spéciales", url: "https://freecash.com", icon: "fa-coins" },
+  { name: "ySense", category: "sondage", desc: "Sondages internationaux rémunérés", url: "https://www.ysense.com", icon: "fa-globe" },
+  { name: "Survey Junkie", category: "sondage", desc: "Partagez votre opinion contre récompenses", url: "https://www.surveyjunkie.com", icon: "fa-poll" },
+  { name: "LifePoints", category: "sondage", desc: "Panel de sondages pour grandes marques", url: "https://www.lifepointspanel.com", icon: "fa-star" },
+  { name: "Google Opinion Rewards", category: "sondage", desc: "Sondages courts pour crédit Google", url: "https://play.google.com/store/apps/details?id=com.google.android.apps.paidtasks", icon: "fa-google" },
+  { name: "AttaPoll", category: "sondage", desc: "App de sondages avec paiement PayPal", url: "https://attapoll.app", icon: "fa-mobile-alt" },
+  { name: "Prolific", category: "sondage", desc: "Études universitaires bien rémunérées", url: "https://www.prolific.co", icon: "fa-graduation-cap" },
+  { name: "User Interviews", category: "sondage", desc: "Participez à des études de marché", url: "https://www.userinterviews.com", icon: "fa-users" },
+  { name: "VotreOpinion", category: "sondage", desc: "Sondages francophones, bons d'achat", url: "https://www.votreopinion.fr", icon: "fa-euro-sign" },
+  { name: "Ipsos iSay", category: "sondage", desc: "Sondages de l'institut Ipsos", url: "https://www.ipsosisay.com", icon: "fa-chart-bar" },
+  { name: "Branded Surveys", category: "sondage", desc: "Sondages rémunérés en dollars", url: "https://www.brandedsurveys.com", icon: "fa-tag" },
+  { name: "Prime Opinion", category: "sondage", desc: "Nouvelle plateforme de sondages", url: "https://primeopinion.com", icon: "fa-thumbs-up" },
+  { name: "Giraffe Panel", category: "sondage", desc: "Sondages pour le marché australien", url: "https://www.giraffepanel.com", icon: "fa-globe-asia" },
+  { name: "PaidViewpoint", category: "sondage", desc: "Sondages courts et ciblés", url: "https://www.paidviewpoint.com", icon: "fa-eye" },
+  { name: "Mobrog", category: "sondage", desc: "Sondages mobiles internationaux", url: "https://www.mobrog.com", icon: "fa-mobile" },
+  { name: "Triaba", category: "sondage", desc: "Sondages avec paiement PayPal rapide", url: "https://triaba.com", icon: "fa-bolt" },
+  { name: "Opinion Outpost", category: "sondage", desc: "Plateforme de sondages établie", url: "https://www.opinionoutpost.com", icon: "fa-door-open" },
+  { name: "Myiyo", category: "sondage", desc: "Sondages de YouGov France", url: "https://myiyo.com", icon: "fa-flag" },
+  { name: "Crowdology", category: "sondage", desc: "Sondages pour le marché UK", url: "https://www.crowdology.co.uk", icon: "fa-pound-sign" },
+  { name: "Valued Opinions", category: "sondage", desc: "Sondages récompensés en cartes cadeaux", url: "https://www.valuedopinions.com", icon: "fa-gift" },
+  { name: "Eureka Surveys", category: "sondage", desc: "Application mobile de sondages", url: "https://eurekasurveys.com", icon: "fa-mobile-alt" },
+  { name: "Panel Place", category: "sondage", desc: "Accès à de nombreux panels", url: "https://www.panelplace.com", icon: "fa-th-large" },
+  { name: "Surveys On The Go", category: "sondage", desc: "Sondages via application mobile", url: "https://surveysonthego.com", icon: "fa-walking" },
+  
+  // 🔧 MICRO-TÂCHES (25+)
+  { name: "Clickworker", category: "micro", desc: "Micro-tâches variées (texte, recherche)", url: "https://www.clickworker.com", icon: "fa-mouse-pointer" },
+  { name: "Amazon Mechanical Turk", category: "micro", desc: "Plateforme historique de micro-tâches", url: "https://www.mturk.com", icon: "fa-robot" },
+  { name: "Microworkers", category: "micro", desc: "Tâches simples pour internautes", url: "https://www.microworkers.com", icon: "fa-tasks" },
+  { name: "Appen", category: "micro", desc: "Tâches spécialisées (IA, transcription)", url: "https://appen.com", icon: "fa-brain" },
+  { name: "OneForma", category: "micro", desc: "Tâches linguistiques et techniques", url: "https://www.oneforma.com", icon: "fa-language" },
+  { name: "Remotasks", category: "micro", desc: "Annotation de données pour l'IA", url: "https://www.remotasks.com", icon: "fa-project-diagram" },
+  { name: "DataAnnotation", category: "micro", desc: "Annotation et évaluation de données", url: "https://www.dataannotation.tech", icon: "fa-code" },
+  { name: "Telus International", category: "micro", desc: "Tâches digitales variées", url: "https://www.telusinternational.com", icon: "fa-network-wired" },
+  { name: "Lionbridge", category: "micro", desc: "Tâches de test et évaluation", url: "https://www.lionbridge.com", icon: "fa-search" },
+  { name: "Playment", category: "micro", desc: "Annotation de données pour véhicules autonomes", url: "https://playment.io", icon: "fa-car" },
+  { name: "Hivemicro", category: "micro", desc: "Micro-tâches pour entreprises", url: "https://www.hivemicro.com", icon: "fa-bee" },
+  { name: "Neevo", category: "micro", desc: "Tâches linguistiques (vocal, texte)", url: "https://neevo.ai", icon: "fa-comments" },
+  { name: "Picoworkers", category: "micro", desc: "Petites tâches en ligne", url: "https://www.picoworkers.com", icon: "fa-user-friends" },
+  { name: "RapidWorkers", category: "micro", desc: "Tâches rapides et simples", url: 
+    "https://rapidworkers.com", icon: "fa-running" },
+  { name: "SerpClix", category: "micro", desc: "Recherches Google rémunérées", url: "https://serpclix.com", icon: "fa-search-dollar" },
+  { name: "Testable Minds", category: "micro", desc: "Tests cognitifs en ligne", url: "https://minds.testable.org", icon: "fa-lightbulb" },
+  { name: "UserTesting", category: "micro", desc: "Tester des sites et applications", url: "https://www.usertesting.com", icon: "fa-vial" },
+  { name: "Userlytics", category: "micro", desc: "Tests utilisateurs à distance", url: "https://www.userlytics.com", icon: "fa-chart-line" },
+  { name: "TryMyUI", category: "micro", desc: "Tests d'utilisabilité de sites web", url: "https://www.trymyui.com", icon: "fa-desktop" },
+  { name: "Intellizoom", category: "micro", desc: "Tests d'utilisabilité et études", url: "https://www.intellizoom.com", icon: "fa-search" },
+  { name: "UserFeel", category: "micro", desc: "Tests d'utilisabilité rémunérés", url: "https://www.userfeel.com", icon: "fa-feather-alt" },
+  { name: "TestingTime", category: "micro", desc: "Tests utilisateurs pour entreprises", url: "https://www.testingtime.com", icon: "fa-clock" },
+  { name: "Validately", category: "micro", desc: "Recherches utilisateurs à distance", url: "https://validately.com", icon: "fa-check-circle" },
+  { name: "Userbrain", category: "micro", desc: "Tests utilisateurs réguliers", url: "https://userbrain.com", icon: "fa-brain" },
+  { name: "Loop11", category: "micro", desc: "Tests d'utilisabilité en ligne", url: "https://www.loop11.com", icon: "fa-infinity" },
+  
+  // 💼 FREELANCE (20+)
+  { name: "Upwork", category: "freelance", desc: "Plateforme pro pour freelances experts", url: "https://www.upwork.com", icon: "fa-briefcase" },
+  { name: "Fiverr", category: "freelance", desc: "Vendre des services à partir de 5$", url: "https://www.fiverr.com", icon: "fa-rocket" },
+  { name: "Freelancer", category: "freelance", desc: "Marketplace avec concours de projets", url: "https://www.freelancer.com", icon: "fa-user-tie" },
+  { name: "Toptal", category: "freelance", desc: "Réseau d'élite pour freelances (top 3%)", url: "https://www.toptal.com", icon: "fa-crown" },
+  { name: "PeoplePerHour", category: "freelance", desc: "Freelance par heure ou projet", url: "https://www.peopleperhour.com", icon: "fa-clock" },
+  { name: "Guru", category: "freelance", desc: "Plateforme flexible pour freelances", url: "https://www.guru.com", icon: "fa-user-md" },
+  { name: "99designs", category: "freelance", desc: "Spécialisé dans le design graphique", url: "https://99designs.com", icon: "fa-palette" },
+  { name: "SimplyHired", category: "freelance", desc: "Agrégateur d'offres d'emploi freelance", url: "https://www.simplyhired.com", icon: "fa-search" },
+  { name: "FlexJobs", category: "freelance", desc: "Offres d'emploi flexibles vérifiées", url: "https://www.flexjobs.com", icon: "fa-user-clock" },
+  { name: "SolidGigs", category: "freelance", desc: "Curated freelance jobs delivered weekly", url: "https://solidgigs.com", icon: "fa-gem" },
+  { name: "DesignCrowd", category: "freelance", desc: "Concours de design", url: "https://www.designcrowd.com", icon: "fa-pencil-ruler" },
+  { name: "WriterAccess", category: "freelance", desc: "Plateforme pour rédacteurs", url: "https://www.writeraccess.com", icon: "fa-pen-fancy" },
+  { name: "Contently", category: "freelance", desc: "Plateforme pour créateurs de contenu", url: "https://contently.com", icon: "fa-newspaper" },
+  { name: "Skyword", category: "freelance", desc: "Création de contenu pour marques", url: "https://www.skyword.com", icon: "fa-cloud" },
+  { name: "Scripted", category: "freelance", desc: "Rédaction et création de contenu", url: "https://www.scripted.com", icon: "fa-file-alt" },
+  { name: "Textbroker", category: "freelance", desc: "Plateforme de rédaction", url: "https://www.textbroker.com", icon: "fa-font" },
+  { name: "Constant Content", category: "freelance", desc: "Vente d'articles pré-écrits", url: "https://www.constant-content.com", icon: "fa-shopping-cart" },
+  { name: "CrowdContent", category: "freelance", desc: "Plateforme de création de contenu", url: "https://www.crowdcontent.com", icon: "fa-users" },
+  { name: "Voice123", category: "freelance", desc: "Plateforme pour comédiens de doublage", url: "https://voice123.com", icon: "fa-microphone" },
+  { name: "Bunny Studio", category: "freelance", desc: "Services créatifs à la demande", url: "https://bunnystudio.com", icon: "fa-magic" },
+  
+  // 🎮 JEUX & APPS (15+)
+  { name: "Mistplay", category: "jeux", desc: "Gagner en jouant à des jeux mobiles", url: "https://www.mistplay.com", icon: "fa-gamepad" },
+  { name: "Gam3s.gg", category: "jeux", desc: "Jeux pour gagner des cryptomonnaies", url: "https://gam3s.gg", icon: "fa-coins" },
+  { name: "Poll Play", category: "jeux", desc: "Jeux divers pour gagner de l'argent", url: "https://pollplay.com", icon: "fa-poll" },
+  { name: "Cash'Em All", category: "jeux", desc: "Jeux mobiles rémunérés", url: "https://cashemall.com", icon: "fa-dice" },
+  { name: "Gamehag", category: "jeux", desc: "Jeux vidéo, tâches, cadeaux steam", url: "https://gamehag.com", icon: "fa-headset" },
+  { name: "Skillz", category: "jeux", desc: "Tournois de jeux mobiles avec cash prizes", url: "https://www.skillz.com", icon: "fa-trophy" },
+  { name: "Lucktastic", category: "jeux", desc: "Jeux de grattage et loteries", url: "https://lucktastic.com", icon: "fa-scroll" },
+  { name: "Huuuge Casino", category: "jeux", desc: "Jeux de casino avec récompenses", url: "https://www.huuugegames.com", icon: "fa-dice-five" },
+  { name: "Swagbucks Games", category: "jeux", desc: "Section jeux de Swagbucks", url: "https://www.swagbucks.com/games", icon: "fa-gamepad" },
+  { name: "AppKarma", category: "jeux", desc: "Télécharger des apps pour gagner", url: "https://appkarma.com", icon: "fa-mobile-alt" },
+  { name: "TapCash", category: "jeux", desc: "Jeux rapides pour gagner des points", url: "https://tapcash.me", icon: "fa-hand-point-up" },
+  { name: "Rewardable", category: "jeux", desc: "Regarder des vidéos, jouer à des jeux", url: "https://www.rewardable.com", icon: "fa-play-circle" },
+  { name: "AppTrailers", category: "jeux", desc: "Regarder des trailers d'apps", url: "https://apptrailers.com", icon: "fa-film" },
+  { name: "Long Game", category: "jeux", desc: "Épargner en jouant à des mini-jeux", url: "https://longgame.co", icon: "fa-piggy-bank" },
+  { name: "BananaBucks", category: "jeux", desc: "Jeux pour gagner des récompenses", url: "https://bananabucks.com", icon: "fa-apple-alt" },
+  
+  // 🛒 VENDRE/CRÉER (15+)
+  { name: "PrintKK", category: "vendre", desc: "Impression à la demande pour designers", url: "https://printkk.com", icon: "fa-tshirt" },
+  { name: "Redbubble", category: "vendre", desc: "Vendre ses designs sur des produits", url: "https://www.redbubble.com", icon: "fa-palette" },
+  { name: "Society6", category: "vendre", desc: "Art imprimé sur objets décoratifs", url: "https://society6.com", icon: "fa-images" },
+  { name: "Shutterstock", category: "vendre", desc: "Vendre photos et vidéos", url: "https://www.shutterstock.com", icon: "fa-camera" },
+  { name: "Adobe Stock", category: "vendre", desc: "Banque d'images d'Adobe", url: "https://stock.adobe.com", icon: "fa-adobe" },
+  { name: "Alamy", category: "vendre", desc: "Banque d'images pour photographes", url: "https://www.alamy.com", icon: "fa-image" },
+  { name: "Depositphotos", category: "vendre", desc: "Vendre photos, vidéos, musique", url: "https://depositphotos.com", icon: "fa-photo-video" },
+  { name: "Fiverr Pro", category: "vendre", desc: "Services premium sur Fiverr", url: "https://www.fiverr.com/pro", icon: "fa-star" },
+  { name: "Envato Market", category: "vendre", desc: "Vendre thèmes, templates, graphismes", url: "https://envato.com", icon: "fa-shopping-bag" },
+  { name: "Creative Market", category: "vendre", desc: "Marché pour créatifs", url: "https://creativemarket.com", icon: "fa-paint-brush" },
+  { name: "Etsy", category: "vendre", desc: "Vendre produits artisanaux et vintage", url: "https://www.etsy.com", icon: "fa-gem" },
+  { name: "eBay", category: "vendre", desc: "Vendre des objets neufs ou d'occasion", url: "https://www.ebay.com", icon: "fa-tag" },
+  { name: "Amazon Handmade", category: "vendre", desc: "Produits faits main sur Amazon", url: "https://www.amazon.com/handmade", icon: "fa-hands" },
+  { name: "Spreadshirt", category: "vendre", desc: "Créer et vendre des vêtements", url: "https://www.spreadshirt.com", icon: "fa-tshirt" },
+  { name: "Zazzle", category: "vendre", desc: "Produits personnalisés", url: "https://www.zazzle.com", icon: "fa-star" },
+  
+  // 🌐 DIVERS (15+)
+  { name: "Rakuten", category: "divers", desc: "Cashback sur achats en ligne", url: "https://www.rakuten.com", icon: "fa-shopping-cart" },
+  { name: "Ibotta", category: "divers", desc: "Cashback sur achats en magasin", url: "https://www.ibotta.com", icon: "fa-receipt" },
+  { name: "Honeygain", category: "divers", desc: "Vendre bande passante inutilisée", url: "https://www.honeygain.com", icon: "fa-wifi" },
+  { name: "PacketStream", category: "divers", desc: "Partage de bande passante", url: "https://packetstream.io", icon: "fa-stream" },
+  { name: "Repocket", category: "divers", desc: "Gagner avec sa connexion internet", url: "https://repocket.co", icon: "fa-puzzle-piece" },
+  { name: "Pawns.app", category: "divers", desc: "Partager connexion et sondages", url: "https://pawns.app", icon: "fa-share-alt" },
+  { name: "eBesucher", category: "divers", desc: "Surf rémunéré", url: "https://www.ebesucher.com", icon: "fa-desktop" },
+  { name: "TimeBucks", category: "divers", desc: "Vidéos, sondages, tâches", url: "https://timebucks.com", icon: "fa-dollar-sign" },
+  { name: "RewardXP", category: "divers", desc: "Jeux, offres, sondages", url: "https://www.rewardxp.com", icon: "fa-trophy" },
+  { name: "Gain.gg", category: "divers", desc: "Offres et vidéos rémunérées", url: "https://gain.gg", icon: "fa-gem" },
+  { name: "GG2U", category: "divers", desc: "Jeux, sondages, vidéos", url: "https://www.gg2u.org", icon: "fa-gamepad" },
+  { name: "Idle-Empire", category: "divers", desc: "Récompenses et tâches diverses", url: "https://www.idle-empire.com", icon: "fa-empire" },
+  { name: "Cointiply", category: "divers", desc: "Gagner des cryptomonnaies", url: "https://cointiply.com", icon: "fa-bitcoin" },
+  { name: "FaucetPay", category: "divers", desc: "Micro-paiements en crypto", url: "https://faucetpay.io", icon: "fa-wallet" },
+  { name: "Cryptowin", category: "divers", desc: "Jeux et tâches pour crypto", url: "https://cryptowin.io", icon: "fa-coins" }
+];
+
+// ===== CONFIGURATION MEGA RÉPERTOIRE =====
+let megaPlatformsPerLoad = 30;
+let megaCurrentIndex = 0;
+let megaFilteredPlatforms = [...allPlatforms];
+
+// ===== FONCTIONS MEGA RÉPERTOIRE =====
+function megaRenderPlatforms() {
+  const container = document.getElementById('megaPlatformsGrid');
+  const endIndex = Math.min(megaCurrentIndex + megaPlatformsPerLoad, megaFilteredPlatforms.length);
+  
+  for (let i = megaCurrentIndex; i < endIndex; i++) {
+    const platform = megaFilteredPlatforms[i];
+    const card = document.createElement('div');
+    card.className = 'mega-platform-card';
+    
+    card.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="background: var(--gradient-main); width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+            <i class="fas ${platform.icon}" style="color: white;"></i>
+          </div>
+          <div>
+            <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white-off); margin: 0; letter-spacing: 0.5px;">${platform.name}</h3>
+            <span style="background: rgba(0, 212, 170, 0.1); color: var(--green-profit); padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">${megaGetCategoryLabel(platform.category)}</span>
+          </div>
+        </div>
+      </div>
+      <p style="color: var(--gray-medium); margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.5;">${platform.desc}</p>
+      <div style="text-align: right;">
+        <a href="${platform.url}" target="_blank" style="background: var(--gradient-main); color: white; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 20px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s ease;">
+          Visiter <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i>
+        </a>
+      </div>
+    `;
+    
+    // Effet hover
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-8px)';
+      this.style.borderColor = 'rgba(0, 102, 255, 0.3)';
+      this.style.boxShadow = 'var(--shadow-hover)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
+      this.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+      this.style.boxShadow = 'none';
+    });
+    
+    container.appendChild(card);
+  }
+  
+  megaCurrentIndex = endIndex;
+  megaUpdateCounters();
+  
+  // Masquer le bouton si tout est chargé
+  const loadMoreBtn = document.getElementById('megaLoadMoreBtn');
+  loadMoreBtn.style.display = megaCurrentIndex >= megaFilteredPlatforms.length ? 'none' : 'block';
+}
+
+function megaGetCategoryLabel(category) {
+  const labels = {
+    'sondage': '📊 Sondage',
+    'micro': '🔧 Micro-tâche',
+    'freelance': '💼 Freelance',
+    'jeux': '🎮 Jeu/App',
+    'vendre': '🛒 Vendre',
+    'divers': '🌐 Divers'
+  };
+  return labels[category] || 'Autre';
+}
+
+function megaUpdateCounters() {
+  document.getElementById('megaCurrentCount').textContent = Math.min(megaCurrentIndex, megaFilteredPlatforms.length);
+  document.getElementById('megaTotalCount').textContent = megaFilteredPlatforms.length;
+  document.getElementById('platformCount').textContent = allPlatforms.length;
+}
+
+function megaFilterPlatforms(category) {
+  const container = document.getElementById('megaPlatformsGrid');
+  container.innerHTML = '';
+  megaCurrentIndex = 0;
+  
+  if (category === 'all') {
+    megaFilteredPlatforms = [...allPlatforms];
+  } else {
+    megaFilteredPlatforms = allPlatforms.filter(p => p.category === category);
+  }
+  
+  megaRenderPlatforms();
+}
+
+function megaSearchPlatforms() {
+  const searchTerm = document.getElementById('megaPlatformSearch').value.toLowerCase();
+  const container = document.getElementById('megaPlatformsGrid');
+ container.innerHTML = '';
+  megaCurrentIndex = 0;
+  
+  if (searchTerm === '') {
+    megaFilteredPlatforms = [...allPlatforms];
+  } else {
+    megaFilteredPlatforms = allPlatforms.filter(p => 
+      p.name.toLowerCase().includes(searchTerm) || 
+      p.desc.toLowerCase().includes(searchTerm) ||
+      p.category.toLowerCase().includes(searchTerm)
+    );
+  }
+  
+  megaRenderPlatforms();
+}
+
+// ===== INITIALISATION MEGA RÉPERTOIRE =====
+function initMegaRepertoire() {
+  // Initial render
+  megaRenderPlatforms();
+  
+  // Gestion des filtres
+  document.querySelectorAll('.mega-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.mega-filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      megaFilterPlatforms(this.dataset.filter);
+    });
+  });
+  
+  // Gestion de la recherche
+  document.getElementById('megaPlatformSearch').addEventListener('input', megaSearchPlatforms);
+  
+  // Bouton "Charger plus"
+  document.getElementById('megaLoadMoreBtn').addEventListener('click', megaRenderPlatforms);
+}
+
+// ===== FONCTIONS ORIGINALES DU SITE =====
+// Navigation Mobile
+document.getElementById('mobileToggle').addEventListener('click', function() {
+  document.getElementById('navMenu').classList.toggle('active');
+});
+
+// Fermer le menu en cliquant sur un lien
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navMenu').classList.remove('active');
+  });
+});
+
+// Animation des chiffres
+function animateCounter(element) {
+  const target = parseInt(element.getAttribute('data-count'));
+  const duration = 2000;
+  const step = target / (duration / 16);
+  let current = 0;
+  
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      element.textContent = target.toLocaleString();
+      clearInterval(timer);
+    } else {
+      element.textContent = Math.floor(current).toLocaleString();
+    }
+  }, 16);
+}
+
+// Lancer l'animation des chiffres au scroll
+const observerOptions = {
+  threshold: 0.5
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.stat-number').forEach(counter => {
+        if (!counter.classList.contains('animated')) {
+          counter.classList.add('animated');
+          animateCounter(counter);
+        }
+      });
+    }
+  });
+}, observerOptions);
+
+observer.observe(document.querySelector('.hero'));
+
+// Calculateur de gains
+const calculateEarnings = () => {
+  const platform = document.getElementById('platform').value;
+  const hours = parseInt(document.getElementById('hours').value);
+  const experience = document.getElementById('experience').value;
+  
+  // Taux par heure selon la plateforme et l'expérience
+  const rates = {
+    'freecash': { beginner: 3, intermediate: 5, advanced: 8, expert: 12 },
+    'ysense': { beginner: 4, intermediate: 6, advanced: 9, expert: 14 },
+    'remotasks': { beginner: 5, intermediate: 8, advanced: 12, expert: 18 },
+    'fiverr': { beginner: 8, intermediate: 15, advanced: 25, expert: 40 },
+    'usertesting': { beginner: 7, intermediate: 10, advanced: 15, expert: 22 }
+  };
+  
+  const hourlyRate = rates[platform][experience];
+  const monthlyEarnings = Math.round(hourlyRate * hours * 4.33); // 4.33 semaines/mois
+  
+  // Animation du résultat
+  const resultElement = document.getElementById('resultAmount');
+  const currentValue = parseInt(resultElement.textContent.replace('€', ''));
+  const difference = monthlyEarnings - currentValue;
+  const steps = 30;
+  const stepValue = difference / steps;
+  
+  let step = 0;
+  const interval = setInterval(() => {
+    if (step >= steps) {
+      resultElement.textContent = `€${monthlyEarnings}`;
+      clearInterval(interval);
+    } else {
+      resultElement.textContent = `€${Math.round(currentValue + (stepValue * step))}`;
+      step++;
+    }
+  }, 30);
+};
+
+// Mise à jour du calculateur
+document.getElementById('hours').addEventListener('input', function() {
+  document.getElementById('hoursValue').textContent = this.value;
+  calculateEarnings();
+});
+
+document.getElementById('platform').addEventListener('change', calculateEarnings);
+document.getElementById('experience').addEventListener('change', calculateEarnings);
+
+// Initialiser le calculateur
+calculateEarnings();
+
+// Filtrage des plateformes (section originale)
+document.querySelectorAll('.filter-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    // Retirer la classe active de tous les boutons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    
+    // Ajouter la classe active au bouton cliqué
+    this.classList.add('active');
+    
+    const category = this.getAttribute('data-category');
+    const cards = document.querySelectorAll('.platform-card');
+    
+    cards.forEach(card => {
+      if (category === 'all' || card.getAttribute('data-category') === category) {
+        card.style.display = 'block';
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 10);
+      } else {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          card.style.display = 'none';
+        }, 300);
+      }
+    });
+  });
+});
+
+// ===== INITIALISATION GLOBALE =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialiser le Mega Répertoire
+  initMegaRepertoire();
+  
+  // Animation au scroll
+  const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.platform-card, .calculator-container, .mega-platform-card');
+    
+    elements.forEach(element => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+      
+      if (elementTop < window.innerHeight - elementVisible) {
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      }
+    });
+  };
+  
+  // Initialiser les animations
+  window.addEventListener('scroll', animateOnScroll);
+  window.addEventListener('load', animateOnScroll);
+  
+  // Initialiser l'état des cartes
+  document.querySelectorAll('.platform-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  });
+});
+</script>
+</body>
+</html> 
