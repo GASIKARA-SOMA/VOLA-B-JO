@@ -1,4 +1,3 @@
 # VOLA BOJO
-Travaille et jeux en linge Gasikara
-
-MITADIAVA VOLA NAMA
+**Travaille et jeux en linge Gasikara**
+*MITADIAVA VOLA NAMA*
